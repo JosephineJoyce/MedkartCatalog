@@ -1,0 +1,27 @@
+var express = require('express');
+var bodyParser = require('body-parser');
+var cfenv = require("cfenv");
+var path = require('path');
+var cors = require('cors');
+
+//Setup middleware.
+var app = express();
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'www')));
+
+
+//Setup Cloudant Service.
+var appEnv = cfenv.getAppEnv();
+cloudantService = appEnv.getService("MedKartDB");
+var catalogue = require('./routes/catalogue');
+
+//REST HTTP Methods
+app.get('/items', catalogue.list);
+app.post('/items', catalogue.create);
+
+var host = (process.env.VCAP_APP_HOST || "localhost" );
+var port = 8080;
+// Start server
+app.listen(port);
