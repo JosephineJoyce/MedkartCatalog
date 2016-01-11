@@ -15,11 +15,11 @@ app.use(express.static(path.join(__dirname, 'www')));
 //Setup Cloudant Service.
 var appEnv = cfenv.getAppEnv();
 cloudantService = appEnv.getService("MedKartDB");
-var catalogue = require('./routes/catalogue');
+var catalog = require('./routes/catalog');
 
 //REST HTTP Methods
-app.get('/items', catalogue.list);
-app.post('/items', catalogue.create);
+app.get('/items', catalog.list);
+app.post('/items', catalog.create);
 
 var host = (process.env.VCAP_APP_HOST || "localhost" );
 var port = 8080;
