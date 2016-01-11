@@ -1,1 +1,1 @@
-#Take the base node imageFROM registry.ng.bluemix.net/ibmnode:latest#add the current directory contents into a folder in the containerADD . /node# make the directory created as the working directoryWORKDIR /node# install the required modules using npmRUN npm install# Expose the required portsEXPOSE 80EXPOSE 443EXPOSE 8080#entrypoint settingENTRYPOINT ["node", "/node/app.js"]
+FROM registry.ng.bluemix.net/ibmnode:latestADD . /nodeWORKDIR /nodeRUN npm installEXPOSE 80EXPOSE 443EXPOSE 8080ENTRYPOINT ["node", "/node/app.js"]
